@@ -13,15 +13,15 @@ Important Information
 
 Order of files loaded by a "login" bash shell:
 
-1) /etc/profile
-2) ~/.bash_profile
-3) ~/.bash_login
-4) ~/.profile
+1. /etc/profile
+2. ~/.bash_profile
+3. ~/.bash_login
+4. ~/.profile
 
 Order of files loaded by a non-login shell:
 
-1) /etc/bash.bashrc
-2) ~/.bashrc
+1. /etc/bash.bashrc
+2. ~/.bashrc
 
 Difference between each file:
 
