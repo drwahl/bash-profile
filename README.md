@@ -44,7 +44,7 @@ Then, you simply need to create a file whose title is the name of the host you w
 
 Use external scripts/methods/aliases in bashrc:
 
-To make use of external scripts/methods/aliases in any of the bashrc scripts, please include them in the <git_repo>/bash/ folder, which will be stored as ~/.bash when setup with setup.sh.
+To make use of external scripts/methods/aliases in any of the bashrc scripts, please include them in the "bash" folder in this repo, which will be stored as ~/.bash when setup with setup.sh.
 
 Colors reference
 ================
