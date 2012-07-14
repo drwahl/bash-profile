@@ -1,7 +1,7 @@
 bash-profile
 ============
 
-This repo contains bash profiling specifics, such as color control or PS1 manipulation, that can be shared with other to increase productivity while at Nintendo.  It is suggested to link the default user files (~/.bash_profile, ~/.bash_login, and ~/.profile) to the files in this repo (<git_repo>/bash_profile, <git_repo>/bash_login, and <git_repo>/profile, respectively) then simply update the files in the repo.  Please consider that other users may be using these as well, so please keep the configurations as portable as possible. ./setup.sh has been provided to conveniently do the initial symlink setup.
+This repo contains bash profiling specifics, such as color control or PS1 manipulation, that can be shared with other to increase productivity.  It is suggested to link the default user files (~/.bash_profile, ~/.bash_login, and ~/.profile) to the files in this repo (<git_repo>/bash_profile, <git_repo>/bash_login, and <git_repo>/profile, respectively) then simply update the files in the repo.  Please consider that other users may be using these as well, so please keep the configurations as portable as possible. ./setup.sh has been provided to conveniently do the initial symlink setup.
 
 Installation
 ============
