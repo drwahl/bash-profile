@@ -11,3 +11,6 @@ alias cp='cp -ip'
 
 #usrun is weird... sudo is better
 [ -f /usr/bin/usrun ] && alias sudo='usrun'
+
+#for those of us with lazy thumbs/stiff space bars
+alias cd..='cd ../'
