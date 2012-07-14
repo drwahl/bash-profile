@@ -35,7 +35,9 @@ Tips/Tricks
 
 Host specific configuration
 The following line can be used to call host specific configurations:
+
     . `hostname`.rc
+
 Then, you simply need to create a file whose title is the name of the host you want a specific config for, such as 'foo.rc'.
 
 Use external scripts/methods/aliases in bashrc
