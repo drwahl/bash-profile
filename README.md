@@ -35,7 +35,7 @@ Tips/Tricks
 
 Host specific configuration
 The following line can be used to call host specific configurations:
-`hostname`.rc
+\`hostname\`.rc
 Then, you simply need to create a file whose title is the name of the host you want a specific config for, such as 'foo.rc'.
 
 Use external scripts/methods/aliases in bashrc
@@ -44,7 +44,7 @@ To make use of external scripts/methods/aliases in any of the bashrc scripts, pl
 Colors reference
 ================
 
-Color_Off='\e[0m'       # Text Reset
+`Color_Off='\e[0m'       # Text Reset
 ### Regular Colors
 Black='\e[0;30m'        # Black
 Red='\e[0;31m'          # Red
@@ -108,7 +108,7 @@ On_IBlue='\e[0;104m'    # Blue
 On_IPurple='\e[10;95m'  # Purple
 On_ICyan='\e[0;106m'    # Cyan
 On_IWhite='\e[0;107m'   # White
-
+`
 TODO
 ====
 
