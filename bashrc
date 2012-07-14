@@ -2,6 +2,9 @@
 # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
 # for examples
 
+# If not running interactively, don't do anything
+[ -z "$PS1" ] && return
+
 #set some easily callable variables for colors
 Color_Off='\e[0m'       # Text Reset
 ### Regular Colors
@@ -67,9 +70,6 @@ On_IBlue='\e[0;104m'    # Blue
 On_IPurple='\e[10;95m'  # Purple
 On_ICyan='\e[0;106m'    # Cyan
 On_IWhite='\e[0;107m'   # White
-
-# If not running interactively, don't do anything
-[ -z "$PS1" ] && return
 
 #########################################
 ### start ###############################
@@ -188,9 +188,8 @@ fi
 # You may want to put all your additions into a separate file like
 # ~/.bash_aliases, instead of adding them here directly.
 # See /usr/share/doc/bash-doc/examples in the bash-doc package.
-if [ -f ~/.bash_aliases ]; then
-    . ~/.bash_aliases
-fi
+[ -f ~/.bash_aliases ] && . ~/.bash_aliases
+[ -f ~/.bash_aliases.`whoami` ] && . ~/.bash_aliases.`whoami`
 
 export EDITOR="vim"
 
