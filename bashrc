@@ -174,13 +174,10 @@ PS1="$PS1\$ "
 #######################################################
 
 #enable color support to ls
+export CLICOLOR=1
+export LSCOLORS=GxFxCxDxBxegedabagaced
 if [ -x /usr/bin/dircolors ]; then
     test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
-fi
-#Mac does things differently
-if [[ $mac == "0" ]] ;then
-    export CLICOLOR=1
-    export LSCOLORS=GxFxCxDxBxegedabagaced
 fi
 
 #enable colors for git
