@@ -5,6 +5,9 @@
 # If not running interactively, don't do anything
 [ -z "$PS1" ] && return
 
+os=`uname -s`
+whoami=`who | awk '{print $1}' | head -1`
+
 #set some easily callable variables for colors
 Color_Off='\e[0m'       # Text Reset
 ### Regular Colors
@@ -113,7 +116,7 @@ esac
 #######################################################
 color_prompt=true
 
-PS1='\u@\h:\w/'
+PS1='\u@\h:\w'
 
 #GNU Screen aware prompt
 if [[ "$STY" ]] ; then
@@ -135,22 +138,25 @@ esac
 
 #git aware prompt
 #assume we are on linux, unless we know we are on mac
-mac=`uname -a | grep -q Darwin ; echo $?`
-if [[ $mac != "0" ]]; then
+if [[ $os == "Linux" ]]; then
     git_completion="/etc/bash_completion.d/git"
-else
+elif [[ $os == "Darwin" ]]; then
     git_completion="/opt/local/share/doc/git-core/contrib/completion/git-completion.bash"
     . $git_completion
+else
+    unset git_completion
 fi
 
-if [ -f $git_completion ]; then
-    export GIT_PS1_SHOWDIRTYSTATE=true
-    export GIT_PS1_SHOWUNTRACKEDFILES=true
-    export GIT_PS1_SHOWSTASHSTATE=true
-    if [[ "$color_prompt" ]]; then
-        PS1="$PS1\$(__git_ps1 ' [\[\e[34;1m\]%s\[\e[0m\]]')"
-    else
-        PS1="$PS1\$(__git_ps1 ' [%s]')"
+if [[ "$git_completion" ]]; then
+    if [ -f $git_completion ]; then
+        export GIT_PS1_SHOWDIRTYSTATE=true
+        export GIT_PS1_SHOWUNTRACKEDFILES=true
+        export GIT_PS1_SHOWSTASHSTATE=true
+        if [[ "$color_prompt" ]]; then
+            PS1="$PS1\$(__git_ps1 ' [\[\e[34;1m\]%s\[\e[0m\]]')"
+        else
+            PS1="$PS1\$(__git_ps1 ' [%s]')"
+        fi
     fi
 fi
 
@@ -166,7 +172,7 @@ then
     fi
 fi
 
-PS1="$PS1\$ "
+PS1="$PS1 \$ "
 
 #######################################################
 ### end ###############################################
@@ -190,15 +196,20 @@ fi
 # You may want to put all your additions into a separate file like
 # ~/.bash_aliases, instead of adding them here directly.
 # See /usr/share/doc/bash-doc/examples in the bash-doc package.
-[ -f ~/.bash_aliases ] && . ~/.bash_aliases
-[ -f ~/.bash_aliases.`whoami` ] && . ~/.bash_aliases.`whoami`
+if [ -f ~/.bash_aliases ]; then
+    . ~/.bash_aliases
+fi
+#load user specific aliases
+if [ -f ~/.bash_aliases.$whoami ]; then
+    . ~/.bash_aliases.$whoami
+fi
 
 export EDITOR="vim"
 
 #feels like root, even when you aren't
 export PATH=$PATH:/usr/local/sbin:/sbin/:/usr/sbin
 #if we are on mac, include port installed stuff
-if [[ $mac == "0" ]]; then
+if [[ $os == "Darwin" ]]; then
     export PATH=$PATH:/opt/local/bin/
 fi
 
@@ -210,16 +221,16 @@ export NSS_SSL_CBC_RANDOM_IV=0
 ### tab completion extentions. tab completion makes life good ###
 #################################################################
 
+#tab completion for ssh hosts
+if [ -f ~/.ssh/known_hosts ]; then
+    complete -W "$(echo `cat ~/.ssh/known_hosts | cut -f 1 -d ' ' | sed -e s/,.*//g | uniq | grep -v "\["`;)" ssh
+fi
+
 # enable programmable completion features (you don't need to enable
 # this if it's already enabled in /etc/bash.bashrc and /etc/profile
 # sources /etc/bash.bashrc).
 if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
     . /etc/bash_completion
-fi
-
-#tab completion for ssh hosts
-if [ -f ~/.ssh/known_hosts ]; then
-    complete -W "$(echo `cat ~/.ssh/known_hosts | cut -f 1 -d ' ' | sed -e s/,.*//g | uniq | grep -v "\["`;)" ssh
 fi
 
 #################################################################
@@ -249,4 +260,4 @@ fi;
 #########################################
 
 #after loading everything that is generic to our environment, load user specifc stuff
-[ -f ~/.bashrc.`whoami` ] && . ~/.bashrc.`whoami`
+[ -f ~/.bashrc.$whoami ] && . ~/.bashrc.$whoami
