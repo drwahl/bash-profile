@@ -212,6 +212,10 @@ export PATH=$PATH:/usr/local/sbin:/sbin/:/usr/sbin
 if [[ $os == "Darwin" ]]; then
     export PATH=$PATH:/opt/local/bin/
 fi
+#include bin directory in users homedir
+if [ -d ~/bin ]; then
+    export PATH=$PATH:~/bin/
+fi
 
 #work-around for libnss3/sipe (http://bugs.debian.org/cgi-bin/bugreport.cgi?bug=649456)
 export NSS_SSL_CBC_RANDOM_IV=0
