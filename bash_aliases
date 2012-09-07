@@ -14,3 +14,6 @@ alias cp='cp -ip'
 
 #for those of us with lazy thumbs/stiff space bars
 alias cd..='cd ../'
+
+#check alias when querying 'which'
+alias which='alias | /usr/bin/which --tty-only --read-alias --show-dot --show-tilde'
