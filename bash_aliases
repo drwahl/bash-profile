@@ -9,8 +9,10 @@ fi
 #careful copy, don't overwrite by default
 alias cp='cp -ip'
 
-#usrun is weird... sudo is better
-[ -f /usr/bin/usrun ] && alias sudo='usrun'
+# User specific aliases and functions
+alias gpa="GIT_CURRENT=\`git branch | grep \* | awk '{print \$2}'\`; for x in \`git branch | tr -d \* \`; do git checkout \$x && git pull; done; git checkout \$GIT_CURRENT"
+alias freshen_repos="for repo in * ;do cd $repo ;gpa ;cd - ;done"
+
 
 #for those of us with lazy thumbs/stiff space bars
 alias cd..='cd ../'
