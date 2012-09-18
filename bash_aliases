@@ -11,7 +11,7 @@ alias cp='cp -ip'
 
 # User specific aliases and functions
 alias gpa="GIT_CURRENT=\`git branch | grep \* | awk '{print \$2}'\`; for x in \`git branch | tr -d \* \`; do git checkout \$x && git pull; done; git checkout \$GIT_CURRENT"
-alias freshen_repos="for repo in * ;do cd $repo ;gpa ;cd - ;done"
+alias freshen_repos='for repo in * ;do cd $repo ;gpa ;cd - ;done'
 
 
 #for those of us with lazy thumbs/stiff space bars
