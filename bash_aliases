@@ -18,4 +18,5 @@ alias freshen_repos='for repo in * ;do cd $repo ;gpa ;cd - ;done'
 alias cd..='cd ../'
 
 #check alias when querying 'which'
-alias which='alias | /usr/bin/which --tty-only --read-alias --show-dot --show-tilde'
+# Doesn't work on Debian derived distros. Removing for now. 
+#alias which='alias | /usr/bin/which --tty-only --read-alias --show-dot --show-tilde'
