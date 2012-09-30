@@ -221,7 +221,7 @@ if [[ $os == "Darwin" ]]; then
 fi
 #include bin directory in users homedir
 if [ -d ~/bin ]; then
-    export PATH=$PATH:~/bin/
+    export PATH=$PATH:~/bin
 fi
 
 #work-around for libnss3/sipe (http://bugs.debian.org/cgi-bin/bugreport.cgi?bug=649456)
