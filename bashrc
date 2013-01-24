@@ -254,7 +254,7 @@ fi
 ### ssh related stuff, like ssh-agent ###
 #########################################
 
-test=`ps -ef | grep ssh-agent | grep -v grep  | awk '{print $2}' | xargs`
+test=`ps -ef | grep ssh-agent | grep -v grep  | awk '{print $2}'`
 if [ "$test" = "" ]; then
    # there is no agent running
    if [ -e "$HOME/agent.sh" ]; then
@@ -263,6 +263,8 @@ if [ "$test" = "" ]; then
    fi;
    # start a new agent
    ssh-agent | grep -v echo >&$HOME/agent.sh
+   . $HOME/agent.sh
+   ssh-add
 fi;
 
 #########################################
