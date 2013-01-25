@@ -265,6 +265,8 @@ if [ "$test" = "" ]; then
    ssh-agent | grep -v echo >&$HOME/agent.sh
    . $HOME/agent.sh
    ssh-add
+else
+   . $HOME/agent.sh
 fi;
 
 #########################################
