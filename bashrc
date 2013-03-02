@@ -253,21 +253,40 @@ fi
 ### start ###############################
 ### ssh related stuff, like ssh-agent ###
 #########################################
+start_agent() {
+	ssh-agent | grep -v echo >&$HOME/agent.sh
+        . $HOME/agent.sh
+        ssh-add
+	}
+
+
+cleanup_agent() {
+	# missing agent.sh file
+	killall ssh_agent
+	}
+
+missing_agent() {
+	# agent is dead, so delete agent.sh 
+        rm -f $HOME/agent.sh
+        }
+
 
 test=`ps -ef | grep ssh-agent | grep -v grep  | awk '{print $2}'`
-if [ "$test" = "" ]; then
-   # there is no agent running
+if [ "$test" != "" ]; then
+   # there is  an agent running, check for agent.sh file
    if [ -e "$HOME/agent.sh" ]; then
-      # remove the old file
-      rm -f $HOME/agent.sh
+      # source the agent.sh file
+      . $HOME/agent.sh
+   else
+      # No agent.sh file, orphaned ssh-agent, kill it and restart it.
+      cleanup_agent
+      start_agent
    fi;
-   # start a new agent
-   ssh-agent | grep -v echo >&$HOME/agent.sh
-   . $HOME/agent.sh
-   ssh-add
 else
-   . $HOME/agent.sh
+   # No ssh-agent running, startinga  new one
+   start_agent
 fi;
+
 
 #########################################
 ### end #################################
