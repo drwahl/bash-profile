@@ -141,7 +141,11 @@ esac
 #git aware prompt
 #assume we are on linux, unless we know we are on mac
 if [[ $os == "Linux" ]]; then
-    git_completion="/etc/bash_completion.d/git"
+    if [ -e /usr/share/bash-completion/completions/git ]; then
+        git_completion="/usr/share/bash-completion/completions/git"
+    elif [ -e /etc/bash_completion.d/git ]; then
+        git_completion="/etc/bash_completion.d/git"
+    fi
 elif [[ $os == "Darwin" ]]; then
     git_completion="/opt/local/share/doc/git-core/contrib/completion/git-completion.bash"
     . $git_completion
