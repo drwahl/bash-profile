@@ -257,20 +257,24 @@ fi
 ### start ###############################
 ### ssh related stuff, like ssh-agent ###
 #########################################
+tmpdir=/tmp/`whoami`
+
 start_agent() {
-	ssh-agent | grep -v echo >&$HOME/agent.sh
-        . $HOME/agent.sh
+        mkdir $tmpdir
+        ssh-agent | grep -v echo >&$tmpdir/agent.sh
+        chmod 600 $tmpdir/agent.sh
+        . $tmpdir/agent.sh
         ssh-add
-	}
+        }
 
 
 cleanup_agent() {
-	# missing agent.sh file
-	killall ssh_agent
-	}
+        # missing agent.sh file
+        killall ssh_agent
+        }
 
 missing_agent() {
-	# agent is dead, so delete agent.sh 
+        # agent is dead, so delete agent.sh 
         rm -f $HOME/agent.sh
         }
 
@@ -278,10 +282,10 @@ missing_agent() {
 test=`ps -ef | grep ssh-agent | grep -v grep  | awk '{print $2}'`
 if [ "$test" != "" ]; then
    # there is  an agent running, check for agent.sh file
-   if [ -e "$HOME/agent.sh" ]; then
-      if [ `grep $test $HOME/agent.sh` ]; then
+   if [ -e "$tmpdir/agent.sh" ]; then
+      if [ `grep $test $tmpdir/agent.sh` ]; then
           # source the agent.sh file
-          . $HOME/agent.sh
+          . $tmpdir/agent.sh
       else
          # Stale agent file, does not match ssh-agent.
          cleanup_agent
