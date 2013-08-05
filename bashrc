@@ -257,50 +257,39 @@ fi
 ### start ###############################
 ### ssh related stuff, like ssh-agent ###
 #########################################
-tmpdir=/tmp/`whoami`
 
+
+## FIXME ## doesn't test ssh-add for success, should add that
+
+tmpdir="/tmp/`whoami`"
 start_agent() {
-        mkdir $tmpdir
-        ssh-agent | grep -v echo >&$tmpdir/agent.sh
+        mkdir -m700 $tmpdir
+        ssh-agent | grep -v echo > $tmpdir/agent.sh
         chmod 600 $tmpdir/agent.sh
-        . $tmpdir/agent.sh
+        source $tmpdir/agent.sh
         ssh-add
         }
 
-
-cleanup_agent() {
-        # missing agent.sh file
-        killall ssh_agent
+cleanup() {
+        # soemthing wrong, flatten all
+        rm -rf $tmpdir
+        killall ssh-agent
         }
 
-missing_agent() {
-        # agent is dead, so delete agent.sh 
-        rm -f $HOME/agent.sh
-        }
-
-
-test=`ps -ef | grep ssh-agent | grep -v grep  | awk '{print $2}'`
+test=`ps -ef | grep [s]sh-agent | awk '{print $2}'`
 if [ "$test" != "" ]; then
    # there is  an agent running, check for agent.sh file
    if [ -e "$tmpdir/agent.sh" ]; then
-      if [ `grep $test $tmpdir/agent.sh` ]; then
-          # source the agent.sh file
-          . $tmpdir/agent.sh
-      else
-         # Stale agent file, does not match ssh-agent.
-         cleanup_agent
-         start_agent
-      fi
+      source $tmpdir/agent.sh
    else
       # No agent.sh file, orphaned ssh-agent, kill it and restart it.
-      cleanup_agent
+      cleanup
       start_agent
    fi;
 else
-   # No ssh-agent running, startinga  new one
+   # No ssh-agent running, starting a  new one
    start_agent
 fi;
-
 
 #########################################
 ### end #################################
