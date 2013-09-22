@@ -91,6 +91,11 @@ HISTIGNORE="reboot:shutdown *:ls:pwd:exit:mount:man *:history"
 export HISTSIZE=10000
 export HISTFILESIZE=10000
 
+# Add timestamp to history file.
+export HISTTIMEFORMAT="%F %T "
+
+
+
 #append to history, don't overwrite
 shopt -s histappend
 PROMPT_COMMAND='history -a'
