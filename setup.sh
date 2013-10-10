@@ -3,7 +3,6 @@
 files="bash bash_profile bash_login bash_aliases bashrc profile"
 date=`date +"%Y%m%d"`
 
-#for file in bash_profile bash_login bash_aliases bashrc profile; do
 for file in $files; do
     if [ -h ~/.$file ]; then
         unlink ~/.$file
@@ -16,3 +15,4 @@ for file in $files; do
     echo "symlinking $PWD/$file to ~/.$file"
     ln -s $PWD/$file ~/.$file
 done
+
