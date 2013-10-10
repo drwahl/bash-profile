@@ -17,11 +17,16 @@ gpa() {
 
 freshen_repos() {
 	for repo in *
-		do cd $repo
+		do
+		if [ -d $repo ]
+		then
+		cd $repo
 			echo " "
 			echo " ======== ${repo} ========= "
 			gpa
 			cd ../
+		else pass
+		fi
 		done
 	}
 
