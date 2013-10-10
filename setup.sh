@@ -16,3 +16,9 @@ for file in $files; do
     ln -s $PWD/$file ~/.$file
 done
 
+
+if [ -d ~/bin ]
+	then cp -d bin/* ~/bin
+else cp -rd bin ~/bin
+fi
+
