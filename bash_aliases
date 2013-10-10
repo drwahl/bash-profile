@@ -9,11 +9,6 @@ fi
 #careful copy, don't overwrite by default
 alias cp='cp -ip'
 
-# User specific aliases and functions
-alias gpa='GIT_CURRENT=`git branch | grep \* | awk '\''{print $2}'\''`; GIT_CURRENTDIR=`pwd`;GIT_TOPDIR=`git rev-parse --show-toplevel`; cd /home/jrichardson/Projects/Mine/bash-profile;for x in `git branch | tr -d \* `; do git checkout $x && git pull; done; git checkout master;cd $GIT_CURRENTDIR \; '
-alias freshen_repos='for repo in * ;do cd $repo ;echo " ";echo " ======== ${repo} ========= ";gpa ;cd - ;done'
-
-
 #for those of us with lazy thumbs/stiff space bars
 alias cd..='cd ../'
 
