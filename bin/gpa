@@ -18,15 +18,14 @@ gpa() {
 freshen_repos() {
 	for repo in *
 		do
+		echo " ======== ${repo} ========= "
 		if [ -d $repo ]
 		then
 		cd $repo
 			echo " "
-			echo " ======== ${repo} ========= "
 			gpa
 			cd ../
 		else
-			echo "========= ${repo} ========= "
 			echo " ${repo} Not a dir, so can\'t be a repo"
 		fi
 		done
