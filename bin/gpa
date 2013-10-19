@@ -25,7 +25,9 @@ freshen_repos() {
 			echo " ======== ${repo} ========= "
 			gpa
 			cd ../
-		else pass
+		else
+			echo ""
+			echo " $repo Not a dir, so can\'t be a repo"
 		fi
 		done
 	}
