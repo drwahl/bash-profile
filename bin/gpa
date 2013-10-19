@@ -19,14 +19,15 @@ freshen_repos() {
 	for repo in *
 		do
 		echo " ======== ${repo} ========= "
+		echo " "
 		if [ -d $repo ]
 		then
 		cd $repo
-			echo " "
 			gpa
 			cd ../
 		else
 			echo " ${repo} Not a dir, so can\'t be a repo"
+		echo " "
 		fi
 		done
 	}
