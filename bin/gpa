@@ -11,7 +11,7 @@ gpa() {
 	for x in `git branch | tr -d \* `
 		do git checkout $x && git pull
 		done
-	git checkout master
+	git checkout $GIT_CURRENT
 	cd $GIT_CURRENTDIR
 	}
 
