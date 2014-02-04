@@ -16,6 +16,14 @@ gpa() {
 	}
 
 freshen_repos() {
+	AMIGITREPO=`git status`
+	RC=$?
+	if [ $RC = 0 ]
+	then
+		echo "In a git repo, we will use gpa instead"
+		gpa
+		exit
+	fi
 	for repo in *
 		do
 		echo " ======== ${repo} ========= "
