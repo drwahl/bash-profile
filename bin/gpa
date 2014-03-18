@@ -16,7 +16,7 @@ gpa() {
 	}
 
 freshen_repos() {
-	AMIGITREPO=`git status`
+	AMIGITREPO=`git status 2>&1 > /dev/null`
 	RC=$?
 	if [ $RC = 0 ]
 	then
@@ -34,7 +34,7 @@ freshen_repos() {
 			gpa
 			cd ../
 		else
-			echo " ${repo} Not a dir, so can\'t be a repo"
+			echo " ${repo} Not a dir, so can't be a repo"
 		echo " "
 		fi
 		done
