@@ -1,1 +1,54 @@
-gpa
+#!/bin/sh
+#Converted from alias after alias got to be too big and convoluted
+
+
+gpa() {
+	GIT_CURRENT=`git branch | grep \* | awk '{print $2}'`
+	GIT_CURRENTDIR=`pwd`
+	GIT_TOPDIR=`git rev-parse --show-toplevel`
+	cd $GIT_TOPDIR
+
+	for x in `git branch | tr -d \* `
+		do git checkout $x && git pull
+		done
+	git checkout $GIT_CURRENT
+	cd $GIT_CURRENTDIR
+	}
+
+freshen_repos() {
+	AMIGITREPO=`git status 2>&1 > /dev/null`
+	RC=$?
+	if [ $RC = 0 ]
+	then
+		echo "In a git repo, we will use gpa instead"
+		gpa
+		exit
+	fi
+	for repo in *
+		do
+		echo " ======== ${repo} ========= "
+		echo " "
+		if [ -d $repo ]
+		then
+		cd $repo
+			gpa
+			cd ../
+		else
+			echo " ${repo} Not a dir, so can't be a repo"
+		echo " "
+		fi
+		done
+	}
+
+base="$(basename "$0")"
+case $base in
+	freshen_repos)
+		freshen_repos
+	;;
+	gpa)
+		gpa
+	;;
+	*)
+		echo "Catchall, try again"
+	;;
+esac
