@@ -25,7 +25,8 @@ freshen_repos() {
 	fi
 	for repo in *
 		do
-		echo " ======== ${repo} ========= "
+		echo "=========================="
+		echo "\n\n ======== ${repo} ========= "
 		echo " "
 		if [ -d $repo ]
 		then
