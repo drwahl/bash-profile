@@ -298,5 +298,11 @@ fi;
 ### ssh related stuff, like ssh-agent ###
 #########################################
 
+# run logout script, even for non-login shells
+trap_exit() {
+	. "$HOME/.bash_logout"
+}
+trap trap_exit EXIT
+
 #after loading everything that is generic to our environment, load user specifc stuff
 [ -f ~/.bashrc.$whoami ] && . ~/.bashrc.$whoami

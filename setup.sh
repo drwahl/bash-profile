@@ -1,6 +1,6 @@
 #this script will setup bash specifics using the configs in this repo
 
-files="bash bash_profile bash_login bash_aliases bashrc profile bash_completion"
+files="bash bash_profile bash_login bash_aliases bashrc profile bash_completion bash_logout"
 date=`date +"%Y%m%d"`
 
 for file in $files; do
