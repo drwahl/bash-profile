@@ -1,0 +1,27 @@
+# nova bash completions
+_nova_completion() {
+	local cur=${COMP_WORDS[COMP_CWORD]}
+	COMPREPLY=( $(compgen -W "`cat $NOVA_OUTPUT_LOG`" -- $cur) )
+}
+complete -F _nova_completion nova
+
+# cinder bash completions
+_cinder_completion() {
+	local cur=${COMP_WORDS[COMP_CWORD]}
+	COMPREPLY=( $(compgen -W "`cat $CINDER_OUTPUT_LOG`" -- $cur) )
+}
+complete -F _cinder_completion cinder
+
+# glance bash completions
+_glance_completion() {
+	local cur=${COMP_WORDS[COMP_CWORD]}
+	COMPREPLY=( $(compgen -W "`cat $GLANCE_OUTPUT_LOG`" -- $cur) )
+}
+complete -F _glance_completion glance
+
+# keystone bash completions
+_keystone_completion() {
+	local cur=${COMP_WORDS[COMP_CWORD]}
+	COMPREPLY=( $(compgen -W "`cat $KEYSTONE_OUTPUT_LOG`" -- $cur) )
+}
+complete -F _keystone_completion keystone
