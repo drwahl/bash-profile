@@ -38,3 +38,5 @@ _keystone() {
 	keystone $* | tee -a $KEYSTONE_OUTPUT_LOG
 }
 alias keystone="_keystone $*"
+
+alias ssh="~/.bash/try-mosh.sh $*"
